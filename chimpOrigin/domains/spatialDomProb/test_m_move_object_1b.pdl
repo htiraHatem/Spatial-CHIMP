@@ -1,0 +1,113 @@
+(Problem
+
+(ArgumentSymbols
+  mug1 mug2
+  nothing
+  placingAreaCounter1 manipulationAreaCounter1 preManipulationAreaEastCounter1
+  placingAreaTable1 manipulationAreaTable1 preManipulationAreaSouthTable1
+  true false
+  table1 table2 counter1
+  guest1 guest2
+  table table1 table2
+  knife knife1 knife2
+  fork fork1
+  dish dish1
+  leftArm1 rightArm1
+  ArmTuckedPosture ArmUnTuckedPosture ArmToSidePosture ArmUnnamedPosture ArmCarryPosture
+  TorsoUpPosture TorsoDownPosture TorsoMiddlePosture
+  coffeeJug1 milkPot1 sugarPot1 sugarPot2
+  Milk Coffee Sugar Mug Peppermill Dish
+  n)
+
+(Instances ManipulationArea
+	   manipulationAreaCounter1
+    	    manipulationAreaTable1)
+
+#(UnarySpatialFluent sp0 Size(table [100,100] [300,300]))
+#(UnarySpatialFluent sp01 Size(manipulationAreaTable1 [150,150] [30,30]))
+#(UnarySpatialFluent sp02 Size(preManipulationAreaSouthTable1 [50,100] [30,30]))
+(UnarySpatialFluent sp03 Size(placingAreaTable1 [100,100] [30,30]))
+
+(RectangularSpatialFluent sp11_x During(manipulationAreaTable1 preManipulationAreaSouthTable1))
+(RectangularSpatialFluent sp11_y After(manipulationAreaTable1 preManipulationAreaSouthTable1))
+
+(RectangularSpatialFluent sp12_x During(placingAreaTable1 manipulationAreaTable1))
+(RectangularSpatialFluent sp12_y After(placingAreaTable1 manipulationAreaTable1))
+
+
+(RectangularSpatialFluent sp21_x During(manipulationAreaCounter1 preManipulationAreaEastCounter1))
+(RectangularSpatialFluent sp21_y After(manipulationAreaCounter1 preManipulationAreaEastCounter1))
+
+(RectangularSpatialFluent sp22_x During(placingAreaCounter1 manipulationAreaCounter1))
+(RectangularSpatialFluent sp22_y After(placingAreaCounter1 manipulationAreaCounter1))
+
+(UnarySpatialFluent sp1 Size(knife1 [4,4] [18,18]))
+(UnarySpatialFluent sp2 Size(fork1 [4,4] [18,18]))
+# enough distance : false
+(UnarySpatialFluent sp3 Size(dish1 [45,45] [45,45]))
+
+
+(UnarySpatialFluent sp4 At(knife1 [50,50] [54,54] [50,50] [68,68]))
+#(UnarySpatialFluent sp5 At(dish1 [56,56] [71,71] [50,50] [75,75]))
+(UnarySpatialFluent sp6 At(fork1 [72,72] [76,76] [50,50] [68,68]))
+(UnarySpatialFluent sp7 At(placingAreaTable1 [49,49] [149,149] [49,49] [79,79]))
+
+
+# (RectangularSpatialFluent (X,Y)(from,to))
+
+(RectangularSpatialFluent sp3_x During(fork placingAreaTable1))
+(RectangularSpatialFluent sp3_y During(fork placingAreaTable1))
+
+(RectangularSpatialFluent sp4_x During(knife placingAreaTable1))
+(RectangularSpatialFluent sp4_y During(knife placingAreaTable1))
+
+(RectangularSpatialFluent sp5_x Before(knife Dish))
+(RectangularSpatialFluent sp5_y During(knife Dish))
+
+(RectangularSpatialFluent sp6_x After(fork Dish))
+(RectangularSpatialFluent sp6_y During(fork Dish))
+
+(RectangularSpatialFluent sp7_x During(dish placingAreaCounter1))
+(RectangularSpatialFluent sp7_y During(dish placingAreaCounter1))
+
+# Assertion
+(RectangularSpatialFluent ass1_x Equals(knife knife1))
+(RectangularSpatialFluent ass1_y Equals(knife knife1))
+
+(RectangularSpatialFluent ass2_x Equals(fork fork1))
+(RectangularSpatialFluent ass2_y Equals(fork fork1))
+
+(Fluent c0 Connected(placingAreaCounter1 manipulationAreaCounter1 preManipulationAreaEastCounter1))
+(Constraint Release[0,0](c0))
+
+(Fluent c1 Connected(placingAreaTable1 manipulationAreaTable1 preManipulationAreaSouthTable1))
+(Constraint Release[0,0](c1))
+
+(Fluent f1 HasArmPosture(leftArm1 ArmTuckedPosture))
+(Constraint Release[0,0](f1))
+
+(Fluent f2 HasArmPosture(rightArm1 ArmUnTuckedPosture))
+(Constraint Release[0,0](f2))
+
+(Fluent f3 HasTorsoPosture(TorsoUpPosture))
+(Constraint Release[0,0](f3))
+
+(Fluent f4 RobotAt(preManipulationAreaEastCounter1))
+(Constraint Release[0,0](f4))
+
+(Fluent f6 Holding(rightArm1 nothing))
+(Constraint Release[0,0](f6))
+
+(Fluent f7 Holding(leftArm1 nothing))
+(Constraint Release[0,0](f7))
+
+(Fluent f8 On(dish1 placingAreaCounter1))
+(Constraint Release[0,0](f8))
+
+(Fluent f9 enoughDistance(dish1 knife1 fork1 undef))
+(Constraint Release[0,0](f9))
+
+(Task t0 move_object(dish1 placingAreaTable1))
+(Constraint Release[0,1](t0))
+
+)

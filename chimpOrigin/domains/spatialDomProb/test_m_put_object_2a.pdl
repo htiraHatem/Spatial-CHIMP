@@ -1,0 +1,115 @@
+(Problem
+
+(ArgumentSymbols
+  mug1 mug2
+  nothing
+  true false undef
+  placingAreaEastRightCounter1 placingAreaWestLeftTable1 placingAreaWestRightTable1
+  placingAreaEastLeftTable1 placingAreaEastRightTable1
+  placingAreaNorthLeftTable2 placingAreaNorthRightTable2
+  placingAreaSouthLeftTable2 placingAreaSouthRightTable2
+  trayArea1 
+  manipulationAreaEastCounter1 preManipulationAreaEastCounter1
+  manipulationAreaNorthTable1 manipulationAreaSouthTable1
+  preManipulationAreaNorthTable1 preManipulationAreaSouthTable1
+  manipulationAreaWestTable2 manipulationAreaEastTable2
+  preManipulationAreaWestTable2 preManipulationAreaEastTable2
+  placingAreaTable manipulationAreaTable preManipulationAreaTable
+  floorAreaTamsRestaurant1
+  preManipulationAreaEastCounterOS1 placingAreaEastRightCounterOS1 manipulationAreaEastCounterOS1
+  sittingAreaWestTable1 sittingAreaEastTable1
+  sittingAreaNorthTable2 sittingConstraintSouthTable2
+  table1 table2 counter1
+  guest1 guest2
+  table table1 table2
+  knife knife1 knife2
+  fork fork1
+  dish dish1
+  leftArm1 rightArm1
+  ArmTuckedPosture ArmUnTuckedPosture ArmToSidePosture ArmUnnamedPosture ArmCarryPosture
+  TorsoUpPosture TorsoDownPosture TorsoMiddlePosture
+  coffeeJug1 milkPot1 sugarPot1 sugarPot2
+  Milk Coffee Sugar Mug Peppermill Dish
+  n)
+
+(Instances ManipulationArea
+	   manipulationAreaEastCounter1
+    	   manipulationAreaNorthTable1 manipulationAreaSouthTable1
+	   manipulationAreaWestTable2 manipulationAreaEastTable2)
+	   
+#(UnarySpatialFluent sp0 Size(table [100,100] [300,300]))
+#(UnarySpatialFluent sp01 Size(manipulationAreaTable [50,100] [30,30]))
+#(UnarySpatialFluent sp02 Size(preManipulationAreaTable [50,100] [30,30]))
+(UnarySpatialFluent sp03 Size(placingAreaTable [100,100] [30,30]))
+
+(RectangularSpatialFluent sp11_x During(manipulationAreaTable preManipulationAreaTable))
+(RectangularSpatialFluent sp11_y After(manipulationAreaTable preManipulationAreaTable))
+
+(RectangularSpatialFluent sp12_x During(placingAreaTable manipulationAreaTable))
+(RectangularSpatialFluent sp12_y After(placingAreaTable manipulationAreaTable))
+
+
+(UnarySpatialFluent sp1 Size(knife1 [4,4] [18,18]))
+(UnarySpatialFluent sp2 Size(fork1 [4,4] [18,18]))
+# enough distance : true
+(UnarySpatialFluent sp3 Size(dish1 [15,15] [25,25])) 
+
+
+(UnarySpatialFluent sp4 At(knife1 [50,50] [54,54] [50,50] [68,68]))
+#(UnarySpatialFluent sp5 At(dish1 [56,56] [71,71] [50,50] [75,75]))
+(UnarySpatialFluent sp6 At(fork1 [72,72] [76,76] [50,50] [68,68]))
+(UnarySpatialFluent sp7 At(placingAreaTable [49,49] [149,149] [49,49] [79,79]))
+
+
+# (RectangularSpatialFluent (X,Y)(from,to))
+
+(RectangularSpatialFluent sp3_x During(fork placingAreaTable))
+(RectangularSpatialFluent sp3_y During(fork placingAreaTable))
+
+(RectangularSpatialFluent sp4_x During(knife placingAreaTable))
+(RectangularSpatialFluent sp4_y During(knife placingAreaTable))
+
+(RectangularSpatialFluent sp5_x Before(knife Dish))
+(RectangularSpatialFluent sp5_y During(knife Dish))
+
+(RectangularSpatialFluent sp6_x After(fork Dish))
+(RectangularSpatialFluent sp6_y During(fork Dish))
+
+# Assertion
+(RectangularSpatialFluent ass1_x Equals(knife knife1))
+(RectangularSpatialFluent ass1_y Equals(knife knife1))
+
+(RectangularSpatialFluent ass3_x Equals(fork fork1))
+(RectangularSpatialFluent ass3_y Equals(fork fork1))
+
+
+(Fluent c2 Connected(placingAreaTable manipulationAreaTable preManipulationAreaTable))
+(Constraint Release[0,0](c2))
+
+
+(Fluent f1 HasArmPosture(leftArm1 ArmTuckedPosture))
+(Constraint Release[0,0](f1))
+
+(Fluent f2 HasArmPosture(rightArm1 ArmUnTuckedPosture))
+(Constraint Release[0,0](f2))
+
+(Fluent f3 HasTorsoPosture(TorsoUpPosture))
+(Constraint Release[0,0](f3))
+
+(Fluent f4 RobotAt(preManipulationAreaTable))
+(Constraint Release[0,0](f4))
+
+(Fluent f6 Holding(rightArm1 dish1))
+(Constraint Release[0,0](f6))
+
+(Fluent f7 Holding(leftArm1 nothing))
+(Constraint Release[0,0](f7))
+
+(Fluent f8 enoughDistance(dish1 knife1 fork1 undef))
+(Constraint Release[0,0](f8))
+
+(Task t0 put_object(dish1 placingAreaTable))
+(Constraint Release[0,1](t0))
+
+
+)

@@ -1,0 +1,133 @@
+(Problem
+
+(ArgumentSymbols
+  mug1 mug2
+  nothing
+  placingAreaCounter1 manipulationAreaCounter1 preManipulationAreaEastCounter1
+  placingAreaTable1 manipulationAreaTable1 preManipulationAreaSouthTable1
+  true false
+  table1 table2 counter1
+  guest1 guest2
+  table table1 table2
+  knife knife1 knife2
+  fork fork1
+  dish dish1 dish2 Dish
+  mug mug1
+  leftArm1 rightArm1
+  ArmTuckedPosture ArmUnTuckedPosture ArmToSidePosture ArmUnnamedPosture ArmCarryPosture
+  TorsoUpPosture TorsoDownPosture TorsoMiddlePosture
+  coffeeJug1 milkPot1 sugarPot1 sugarPot2
+  Milk Coffee Sugar Mug Peppermill
+  coffeCreamer1 spoon1
+  n)
+
+(Instances ManipulationArea
+	   manipulationAreaCounter1
+    	    manipulationAreaTable1)
+
+
+
+(UnarySpatialFluent sp5 At(mug1 [49,49] [55,55] [49,49] [69,69]))
+
+#Table objects
+
+(UnarySpatialFluent sp1 Size(knife1 [4,4] [18,18]))
+(UnarySpatialFluent sp2 Size(fork1 [4,4] [18,18]))
+# enough distance : true
+(UnarySpatialFluent sp3 Size(dish1 [15,15] [25,25]))
+
+
+(UnarySpatialFluent sp4 At(knife1 [50,50] [54,54] [50,50] [68,68]))
+#(UnarySpatialFluent sp5 At(dish1 [56,56] [71,71] [50,50] [75,75]))
+(UnarySpatialFluent sp6 At(fork1 [72,72] [76,76] [50,50] [68,68]))
+(UnarySpatialFluent sp7 At(placingAreaTable1 [49,49] [149,149] [49,49] [79,79]))
+
+
+# (RectangularSpatialFluent (X,Y)(from,to))
+
+#Counter1 Constraints
+(RectangularSpatialFluent sp1_x During(mug placingAreaCounter1))
+(RectangularSpatialFluent sp1_y During(mug placingAreaCounter1))
+
+(RectangularSpatialFluent sp2_x During(dish placingAreaCounter1))
+(RectangularSpatialFluent sp2_y During(dish placingAreaCounter1))
+
+(RectangularSpatialFluent sp3_x After(mug dish))
+(RectangularSpatialFluent sp3_y During(mug dish))
+
+
+#Table1 Constraints
+
+(RectangularSpatialFluent sp4_x During(fork placingAreaTable1))
+(RectangularSpatialFluent sp4_y During(fork placingAreaTable1))
+
+(RectangularSpatialFluent sp5_x During(knife placingAreaTable1))
+(RectangularSpatialFluent sp5_y During(knife placingAreaTable1))
+
+(RectangularSpatialFluent sp6_x Before(knife Dish))
+(RectangularSpatialFluent sp6_y During(knife Dish))
+
+(RectangularSpatialFluent sp7_x After(fork Dish))
+(RectangularSpatialFluent sp7_y During(fork Dish))
+
+# Assertion Table1
+(RectangularSpatialFluent ass1_x Equals(knife knife1))
+(RectangularSpatialFluent ass1_y Equals(knife knife1))
+
+(RectangularSpatialFluent ass2_x Equals(fork fork1))
+(RectangularSpatialFluent ass2_y Equals(fork fork1))
+
+# Assertion Counter1
+(RectangularSpatialFluent ass4_x Equals(dish dish1))
+(RectangularSpatialFluent ass4_y Equals(dish dish1))
+
+(RectangularSpatialFluent ass5_x Equals(mug mug1))
+(RectangularSpatialFluent ass5_y Equals(mug mug1))
+
+
+
+(Fluent c0 Connected(placingAreaCounter1 manipulationAreaCounter1 preManipulationAreaEastCounter1))
+(Constraint Release[0,0](c0))
+
+(Fluent c1 Connected(placingAreaTable1 manipulationAreaTable1 preManipulationAreaSouthTable1))
+(Constraint Release[0,0](c1))
+
+(Fluent f1 HasArmPosture(leftArm1 ArmToSidePosture))
+(Constraint Release[0,0](f1))
+
+(Fluent f2 HasArmPosture(rightArm1 ArmToSidePosture))
+(Constraint Release[0,0](f2))
+
+(Fluent f3 On(dish1 placingAreaCounter1))
+(Constraint Release[0,0](f3))
+
+(Fluent f4 RobotAt(manipulationAreaCounter1))
+(Constraint Release[0,0](f4))
+
+(Fluent f5 Holding(leftArm1 nothing))
+(Constraint Release[0,0](f5))
+
+(Fluent f6 Holding(rightArm1 nothing))
+(Constraint Release[0,0](f6))
+
+(Fluent f7 On(mug1 dish1))
+(Constraint Release[0,0](f7))
+
+(Fluent f9 HasTorsoPosture(TorsoUpPosture))
+(Constraint Release[0,0](f9))
+
+# 2D : if object inside another , if knife -->(during,during)--> mug1
+# 2D : if object on top of other , if dish1 -->(Equals,Equals)--> dish2
+(Fluent f8 isCollision(mug1 dish1 undef)) 
+(Constraint Release[0,0](f8))
+
+(Fluent f10 enoughDistance(dish1 knife1 fork1 undef))
+(Constraint Release[0,0](f10))
+
+
+
+(Task t1 serve_an_empty_dish(dish1 placingAreaTable1))
+(Constraint Release[0,1](t1))
+
+
+)

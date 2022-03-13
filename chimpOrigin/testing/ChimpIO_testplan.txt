@@ -1,0 +1,5 @@
+; Solution found
+; Actions:
+0.001: (!move_torso TorsoDownPosture) [4.000]
+0.001: (!tuck_arms ArmTuckedPosture ArmTuckedPosture) [4.000]
+4.002: (!move_base preManipulationAreaNorthTable1) [0.002]
